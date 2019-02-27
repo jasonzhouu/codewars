@@ -1,3 +1,5 @@
+// https://www.codewars.com/kata/55b3425df71c1201a800009c/train/go
+
 package main
 
 import "fmt"
@@ -46,6 +48,7 @@ func num2string(time_in_seconds int) string {
         }
         return time_in_string
 }
+
 
 func main() {
 	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
