@@ -104,6 +104,9 @@ func median(seconds_slice_sorted []int) int {
 }
 
 func Stati(strg string) string {
+	if strg == "" {
+		return ""
+	}
 //	fmt.Println("original input:\t", strg)
 	seconds_slice := string_to_seconds_slice(strg)
 	slice_len := len(seconds_slice)
@@ -137,7 +140,9 @@ func Stati(strg string) string {
 }
 
 func main(){
-	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
+//	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
 //	var a string = "02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41"
+//	var a string = "00|00|00, 00|00|00, 00|00|00, 00|00|00, 00|00|00, 00|00|00, 00|00|00"
+	var a string = ""
 	fmt.Println(Stati(a))
 }
