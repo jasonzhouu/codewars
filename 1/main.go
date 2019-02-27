@@ -52,26 +52,13 @@ func string_to_seconds_slice(strg string) []int{
 	return d
 }
 
-
-func num2string(time_in_seconds int)string {
-	num_array := make([]int, 3)
-	for i := 2; i >= 0; i-- {
-		num_array[i] = time_in_seconds % 60
-		time_in_seconds = time_in_seconds / 60
-	}
-	string_array := make([]string, 3)
-	for i, v := range num_array {
-		if v < 10 {
-			string_array[i] = "0" + strconv.Itoa(v)
-			continue
-		}
-		string_array[i] = strconv.Itoa(v)
-	}
-	var time_in_string string
-	for i := 2; i >= 0; i-- {
-		time_in_string = s.Join(string_array, "|")
-	}
-	return time_in_string
+func num2string(sec int) string {
+        var num_array [3]int
+        for i := 2; i >= 0; i-- {
+                num_array[i] = sec % 60
+                sec = sec / 60
+        }
+        return fmt.Sprintf("%02d|%02d|%02d", num_array[0], num_array[1], num_array[2])
 }
 
 func average(seconds_slice []int) int {
@@ -128,9 +115,9 @@ func Stati(strg string) string {
 }
 
 func main(){
-//	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
+	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
 //	var a string = "02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41"
 //	var a string = "00|00|00, 00|00|00, 00|00|00, 00|00|00, 00|00|00, 00|00|00, 00|00|00"
-	var a string = ""
+//	var a string = ""
 	fmt.Println(Stati(a))
 }
