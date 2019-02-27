@@ -103,24 +103,39 @@ func median(seconds_slice_sorted []int) int {
 	}
 }
 
-func main() {
-	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
-	seconds_slice := string_to_seconds_slice(a)
+func Stati(strg string) string {
+	seconds_slice := string_to_seconds_slice(strg)
+	var result string
+
 	seconds_slice_sort := make([]int, 5)
 	copy(seconds_slice_sort, seconds_slice)
 	sort.Ints(seconds_slice_sort)
-	fmt.Println("input in seconds sorted:\t", seconds_slice_sort, "\n")
+//	fmt.Println("input in seconds sorted:\t", seconds_slice_sort, "\n")
 	min := seconds_slice_sort[0]
 	max := seconds_slice_sort[4]
 	result_range := (max - min)
-	fmt.Println("range in seconds:\t", result_range)
-	fmt.Println("range in string:\t", num2string(result_range), "\n")
+//	fmt.Println("range in seconds:\t", result_range)
+//	fmt.Println("range in string:\t", num2string(result_range), "\n")
+	result += "Range: "
+	result += num2string(result_range)
 
 	average := average(seconds_slice)
-	fmt.Println("average in seconds:\t", average)
-	fmt.Println("average in string:\t", num2string(average), "\n")
+//	fmt.Println("average in seconds:\t", average)
+//	fmt.Println("average in string:\t", num2string(average), "\n")
+	result += " Average: "
+	result += num2string(average)
 
 	median := median(seconds_slice)
-	fmt.Println("median in seconds:\t", median)
-	fmt.Println("median in string:\t", num2string(median))
+//	fmt.Println("median in seconds:\t", median)
+//	fmt.Println("median in string:\t", num2string(median))
+	result += " Median: "
+	result += num2string(median)
+
+	return result
+}
+
+func main(){
+//	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
+	var a string = "02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41"
+	fmt.Println(Stati(a))
 }
