@@ -92,11 +92,11 @@ func median(seconds_slice_sorted []int) int {
 	array_len := len(seconds_slice_sorted)
 	if (array_len % 2) == 1 {
 		median_index := (array_len + 1) / 2
-		median := seconds_slice_sorted[median_index]
+		median := seconds_slice_sorted[median_index-1]
 		return median
 	} else if (array_len % 2) == 0 {
 		median_index := array_len / 2
-		median := (seconds_slice_sorted[median_index] + seconds_slice_sorted[median_index + 1]) / 2
+		median := (seconds_slice_sorted[median_index] + seconds_slice_sorted[median_index - 1]) / 2
 		return median
 	} else {
 		return 0
@@ -104,13 +104,14 @@ func median(seconds_slice_sorted []int) int {
 }
 
 func Stati(strg string) string {
+//	fmt.Println("original input:\t", strg)
 	seconds_slice := string_to_seconds_slice(strg)
+//	fmt.Println("input in seconds:\t", seconds_slice)
 	var result string
 
-	seconds_slice_sort := make([]int, 5)
+	seconds_slice_sort := make([]int, len(seconds_slice))
 	copy(seconds_slice_sort, seconds_slice)
 	sort.Ints(seconds_slice_sort)
-//	fmt.Println("input in seconds sorted:\t", seconds_slice_sort, "\n")
 	min := seconds_slice_sort[0]
 	max := seconds_slice_sort[4]
 	result_range := (max - min)
@@ -125,7 +126,7 @@ func Stati(strg string) string {
 	result += " Average: "
 	result += num2string(average)
 
-	median := median(seconds_slice)
+	median := median(seconds_slice_sort)
 //	fmt.Println("median in seconds:\t", median)
 //	fmt.Println("median in string:\t", num2string(median))
 	result += " Median: "
