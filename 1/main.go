@@ -88,6 +88,21 @@ func average(seconds_slice []int) int {
 	return average
 }
 
+func median(seconds_slice_sorted []int) int {
+	array_len := len(seconds_slice_sorted)
+	if (array_len % 2) == 1 {
+		median_index := (array_len + 1) / 2
+		median := seconds_slice_sorted[median_index]
+		return median
+	} else if (array_len % 2) == 0 {
+		median_index := array_len / 2
+		median := (seconds_slice_sorted[median_index] + seconds_slice_sorted[median_index + 1]) / 2
+		return median
+	} else {
+		return 0
+	}
+}
+
 func main() {
 	var a string = "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
 	seconds_slice := string_to_seconds_slice(a)
@@ -103,5 +118,9 @@ func main() {
 
 	average := average(seconds_slice)
 	fmt.Println("average in seconds:\t", average)
-	fmt.Println("average in string:\t", num2string(average))
+	fmt.Println("average in string:\t", num2string(average), "\n")
+
+	median := median(seconds_slice)
+	fmt.Println("median in seconds:\t", median)
+	fmt.Println("median in string:\t", num2string(median))
 }
