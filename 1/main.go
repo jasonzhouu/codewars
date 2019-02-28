@@ -2,10 +2,12 @@
 
 package main
 
-import "fmt"
-import s "strings"
-import "strconv"
-import "sort"
+import (
+	"fmt"
+	s "strings"
+	"strconv"
+	"sort"
+)
 
 func string2string_array(strg string) []string {
 	a := s.Split(strg, ", ")
@@ -37,7 +39,7 @@ func num2string(sec int) string {
 }
 
 func average(seconds_slice []int) int {
-	var sum int
+	sum := 0
 	for _, v := range seconds_slice {
 		sum += v
 	}
