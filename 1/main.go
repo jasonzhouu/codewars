@@ -9,13 +9,8 @@ import (
 	"sort"
 )
 
-func string2string_array(strg string) []string {
-	a := s.Split(strg, ", ")
-	return a
-}
-
 func string_to_duration(strg string) []int {
-	a := string2string_array(strg)
+	a := s.Split(strg, ", ")
         duration := make([]int, len(a))
         for i1, v1 := range a {
                 c := s.Split(v1, "|")
@@ -63,20 +58,25 @@ func median(seconds_slice_sorted []int) int {
 	}
 }
 
+func get_range(seconds_slice_sort []int) int {
+	min := seconds_slice_sort[0]
+	max := seconds_slice_sort[len(seconds_slice_sort) - 1]
+	return (max - min)
+}
+
 func Stati(strg string) string {
 	if strg == "" {
 		return ""
 	}
-	seconds_slice := string_to_duration(strg)
-	slice_len := len(seconds_slice)
-	var result string
 
-	seconds_slice_sort := make([]int, slice_len)
+	seconds_slice := string_to_duration(strg)
+	result := ""
+
+	seconds_slice_sort := make([]int, len(seconds_slice))
 	copy(seconds_slice_sort, seconds_slice)
 	sort.Ints(seconds_slice_sort)
-	min := seconds_slice_sort[0]
-	max := seconds_slice_sort[slice_len - 1]
-	result_range := (max - min)
+
+	result_range := get_range(seconds_slice_sort)
 	result += "Range: "
 	result += num2string(result_range)
 
