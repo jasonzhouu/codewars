@@ -33,7 +33,7 @@ func num2string(sec int) string {
         return fmt.Sprintf("%02d|%02d|%02d", num_array[0], num_array[1], num_array[2])
 }
 
-func average(seconds_slice []int) int {
+func get_average(seconds_slice []int) int {
 	sum := 0
 	for _, v := range seconds_slice {
 		sum += v
@@ -43,7 +43,7 @@ func average(seconds_slice []int) int {
 	return average
 }
 
-func median(seconds_slice_sorted []int) int {
+func get_median(seconds_slice_sorted []int) int {
 	array_len := len(seconds_slice_sorted)
 	if (array_len % 2) == 1 {
 		median_index := (array_len + 1) / 2
@@ -70,25 +70,14 @@ func Stati(strg string) string {
 	}
 
 	seconds_slice := string_to_duration(strg)
-	result := ""
+	sort.Ints(seconds_slice)
 
-	seconds_slice_sort := make([]int, len(seconds_slice))
-	copy(seconds_slice_sort, seconds_slice)
-	sort.Ints(seconds_slice_sort)
-
-	result_range := get_range(seconds_slice_sort)
-	result += "Range: "
-	result += num2string(result_range)
-
-	average := average(seconds_slice)
-	result += " Average: "
-	result += num2string(average)
-
-	median := median(seconds_slice_sort)
-	result += " Median: "
-	result += num2string(median)
-
-	return result
+	return fmt.Sprintf(
+		"Range: %s Average: %s Median: %s",
+		num2string(get_range(seconds_slice)),
+		num2string(get_average(seconds_slice)),
+		num2string(get_median(seconds_slice)),
+	)
 }
 
 func main(){
