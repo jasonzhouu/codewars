@@ -74,13 +74,13 @@ func Stati(strg string) string {
 		return ""
 	}
 
-	seconds_slice := string_to_slice(strg)
+	seconds_slice_sorted := string_to_slice(strg)
 
 	return fmt.Sprintf(
 		"Range: %s Average: %s Median: %s",
-		seconds_to_HMS(get_range(seconds_slice)),
-		seconds_to_HMS(get_average(seconds_slice)),
-		seconds_to_HMS(get_median(seconds_slice)),
+		seconds_to_HMS(get_range(seconds_slice_sorted)),
+		seconds_to_HMS(get_average(seconds_slice_sorted)),
+		seconds_to_HMS(get_median(seconds_slice_sorted)),
 	)
 }
 
