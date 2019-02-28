@@ -8,18 +8,11 @@ import "strconv"
 import "sort"
 
 func string2string_array(strg string) []string {
-	// "01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"
-        // [01|15|59 1|47|16 01|17|20 1|32|34 2|17|17]
-        // 将第一行的格式转成第二行的格式
 	a := s.Split(strg, ", ")
 	return a
 }
 
 func string_to_2_level_int_slice(strg string) [][3]int {
-	// [01|15|59 1|47|16 01|17|20 1|32|34 2|17|17]
-	// [[1 15 59] [1 47 16] [1 17 20] [1 32 34] [2 17 17]]
-	// 将第一行的格式转成第二行的格式
-
 	a := string2string_array(strg)
         b := make([][3]int, len(a))
         for i1, v1 := range a {
@@ -32,10 +25,7 @@ func string_to_2_level_int_slice(strg string) [][3]int {
 }
 
 func string_to_seconds_slice(strg string) []int{
-
 	b := string_to_2_level_int_slice(strg)
-
-	// d 单层 slice 用于存储换算得到的秒钟数
 	d := make([]int, len(b))
         for i1, v1 := range b {
                 for i2, v2 := range v1 {
