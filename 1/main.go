@@ -12,34 +12,19 @@ func string2string_array(strg string) []string {
 	return a
 }
 
-func string_to_2_level_int_slice(strg string) [][3]int {
+func string_to_duration(strg string) []int {
 	a := string2string_array(strg)
-        b := make([][3]int, len(a))
+        duration := make([]int, len(a))
         for i1, v1 := range a {
                 c := s.Split(v1, "|")
-                for i2, v2 := range c {
-                        b[i1][i2], _ = strconv.Atoi(v2)
-                }
-        }
-	return b
-}
 
-func string_to_seconds_slice(strg string) []int{
-	b := string_to_2_level_int_slice(strg)
-	d := make([]int, len(b))
-        for i1, v1 := range b {
-                for i2, v2 := range v1 {
-                        switch i2 {
-                                case 0:
-                                        d[i1] += v2 * 60 * 60
-                                case 1:
-                                        d[i1] += v2 * 60
-                                case 2:
-                                        d[i1] += v2
-                        }
-                }
+		h, _ := strconv.Atoi(c[0])
+		min, _ := strconv.Atoi(c[1])
+		sec, _ := strconv.Atoi(c[2])
+
+		duration[i1] = h*60*60 + min*60 + sec
         }
-	return d
+	return duration
 }
 
 func num2string(sec int) string {
@@ -80,7 +65,7 @@ func Stati(strg string) string {
 	if strg == "" {
 		return ""
 	}
-	seconds_slice := string_to_seconds_slice(strg)
+	seconds_slice := string_to_duration(strg)
 	slice_len := len(seconds_slice)
 	var result string
 
