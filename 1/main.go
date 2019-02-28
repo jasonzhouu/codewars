@@ -9,22 +9,27 @@ import (
 	"sort"
 )
 
-func string_to_duration(strg string) []int {
+func string_to_slice(strg string) []int {
 	a := s.Split(strg, ", ")
         duration := make([]int, len(a))
-        for i1, v1 := range a {
-                c := s.Split(v1, "|")
-
-		h, _ := strconv.Atoi(c[0])
-		min, _ := strconv.Atoi(c[1])
-		sec, _ := strconv.Atoi(c[2])
-
-		duration[i1] = h*60*60 + min*60 + sec
+        for i, v := range a {
+                duration[i] = HMS_to_seconds(v)
         }
+	sort.Ints(duration)
 	return duration
 }
 
-func num2string(sec int) string {
+func HMS_to_seconds(v string) int {
+	c := s.Split(v, "|")
+
+	h, _ := strconv.Atoi(c[0])
+	min, _ := strconv.Atoi(c[1])
+	sec, _ := strconv.Atoi(c[2])
+
+	return h*60*60 + min*60 + sec
+}
+
+func seconds_to_HMS(sec int) string {
         var num_array [3]int
         for i := 2; i >= 0; i-- {
                 num_array[i] = sec % 60
@@ -69,14 +74,13 @@ func Stati(strg string) string {
 		return ""
 	}
 
-	seconds_slice := string_to_duration(strg)
-	sort.Ints(seconds_slice)
+	seconds_slice := string_to_slice(strg)
 
 	return fmt.Sprintf(
 		"Range: %s Average: %s Median: %s",
-		num2string(get_range(seconds_slice)),
-		num2string(get_average(seconds_slice)),
-		num2string(get_median(seconds_slice)),
+		seconds_to_HMS(get_range(seconds_slice)),
+		seconds_to_HMS(get_average(seconds_slice)),
+		seconds_to_HMS(get_median(seconds_slice)),
 	)
 }
 
