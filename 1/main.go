@@ -5,8 +5,8 @@ package main
 import (
 	"fmt"
 	s "strings"
-	"strconv"
 	"sort"
+	"time"
 )
 
 func string_to_slice(strg string) []int {
@@ -21,12 +21,8 @@ func string_to_slice(strg string) []int {
 
 func HMS_to_seconds(v string) int {
 	c := s.Split(v, "|")
-
-	h, _ := strconv.Atoi(c[0])
-	min, _ := strconv.Atoi(c[1])
-	sec, _ := strconv.Atoi(c[2])
-
-	return h*60*60 + min*60 + sec
+	ti, _ := time.ParseDuration(fmt.Sprintf("%sh%sm%ss", c[0], c[1], c[2]))
+	return int(ti.Seconds())
 }
 
 func seconds_to_HMS(sec int) string {
